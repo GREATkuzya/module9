@@ -1,0 +1,14 @@
+
+  input {
+    width: 200px;
+  }
+  img {
+    width: 200px;
+    height: 150px;
+    margin: 10px;
+  }
+  
+  div {
+    display: flex;
+    flex-wrap: wrap;
+  }
