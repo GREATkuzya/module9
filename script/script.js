@@ -19,6 +19,13 @@
 /* 2. на window 'DOMContentLoaded' событие :
 /*    если window.localStorage.getItem('gallery') существует - вызов функции отрисовки галереи
 */
+window.onload = ()=> {
+  let storedGallery=window.localStorage.getItem('gallery');
+  console.log(storedGallery);
+  if (storedGallery) {
+   gallery(storedGallery);
+  }
+  }
 
 let divNode = document.querySelector('.div');
 let btnNode = document.querySelector('.button');
@@ -42,6 +49,7 @@ function sendXHR(pageField, limitField) {
               console.log(`Error`);
             } else {
           let result = JSON.parse(xhr.response);
+          window.localStorage.setItem("gallery",JSON.parse(xhr.response))
           gallery(result);
                                         }                                                       
 }}
@@ -53,6 +61,7 @@ function gallery(result) {
                   cards +=  cardBlock;
                 });         
                 divNode.innerHTML = cards;
+                
 }
 
 
