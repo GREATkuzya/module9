@@ -68,13 +68,13 @@ function gallery(result) {
  btnNode.addEventListener('click', () => {
   let pageField = document.querySelector('.input1').value;
   let limitField = document.querySelector('.input2').value;
-  window.localStorage.setItem("pageData", pageField);
-  window.localStorage.setItem("limitData", limitField);
-  let limitPage=checkLimit(pageField);
+   let limitPage=checkLimit(pageField);
   console.log(limitPage);
   let limitLimit=checkLimit(limitField);
   console.log(limitLimit);
   if (limitPage && limitLimit) {
+    window.localStorage.setItem("pageData", pageField);
+    window.localStorage.setItem("limitData", limitField);
     sendXHR(pageField, limitField);
  } else if (!limitPage && !limitLimit) {
     divNode.innerHTML=`<br><span>«Страница и лимит вне диапазона от 1 до 10»</span>`; }
