@@ -20,10 +20,10 @@
 /*    если window.localStorage.getItem('gallery') существует - вызов функции отрисовки галереи
 */
 window.onload = ()=> {
-  let storedGallery=window.localStorage.getItem('gallery');
-  console.log(storedGallery);
-  if (storedGallery) {
-   gallery(storedGallery);
+  let storData=window.localStorage.getItem('pageData');
+  let storLimit=window.localStorage.getItem('limitData');
+  if (storData && storLimit) {
+    sendXHR(storData, storLimit);
   }
   }
 
@@ -49,7 +49,6 @@ function sendXHR(pageField, limitField) {
               console.log(`Error`);
             } else {
           let result = JSON.parse(xhr.response);
-          window.localStorage.setItem("gallery",JSON.parse(xhr.response))
           gallery(result);
                                         }                                                       
 }}
@@ -69,6 +68,8 @@ function gallery(result) {
  btnNode.addEventListener('click', () => {
   let pageField = document.querySelector('.input1').value;
   let limitField = document.querySelector('.input2').value;
+  window.localStorage.setItem("pageData", pageField);
+  window.localStorage.setItem("limitData", limitField);
   let limitPage=checkLimit(pageField);
   console.log(limitPage);
   let limitLimit=checkLimit(limitField);
