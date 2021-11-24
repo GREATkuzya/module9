@@ -1,7 +1,30 @@
+/**
+/* входные элементы, которые должны быть видимы глобально: 
+/* @param divNode - контент галереи
+/* @param btnNode - кнопка 
+/* @param pageField - поле ввода страницы .input1
+/* @param limitField - поле ввода страницы .input2
+/*--------------------------------------------------------------
+/* Не стоит все валить в одну кучу, потому что: 
+/* 1. Проверка диапазона и страницы может не дойти до xhr запроса 
+/* 2. xhr запрос может выдать ошибку и отрисовка пойдет по пизде
+/* Я бы сделал так: разделил саму задачу на 3 модуля (функции):
+/* @param checkLimit(value) - функия проверки лимита. @param value - входной параметр введенного диапазона возвращает true или false
+/* @param sendXHR(limit,page) - функция обработки запроса
+/* @param showGallery(response) - функция отрисовки на основе входных данных
+/*--------------------------------------------------------------
+/* 2 eventListener'a:
+/* 1. на кнопку - при ее нажатии происходит вызов
+/*    функции проверки лимитов, если все ок - вызов XHR запроса и при успешном результате - вызов функции отрисовки галереи
+/* 2. на window 'DOMContentLoaded' событие :
+/*    если window.localStorage.getItem('gallery') существует - вызов функции отрисовки галереи
+*/
+
 let divNode = document.querySelector('.div');
 let btnNode = document.querySelector('.button');
 
 btnNode.addEventListener('click', () => {
+
     let a = document.querySelector('.input1').value;
     let b = document.querySelector('.input2').value;
    
